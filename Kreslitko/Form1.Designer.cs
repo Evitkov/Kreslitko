@@ -50,20 +50,32 @@
             this.pnColorWhite = new System.Windows.Forms.Panel();
             this.pnBackColor = new System.Windows.Forms.Panel();
             this.pnForeColor = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbElipse = new System.Windows.Forms.RadioButton();
+            this.rbRectangle = new System.Windows.Forms.RadioButton();
+            this.rbLine = new System.Windows.Forms.RadioButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.souborToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUlozit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOtevrit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiKonec = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlatno)).BeginInit();
             this.sStripBottom.SuspendLayout();
             this.gpVyberBarvy.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbPlatno
             // 
             this.pbPlatno.BackColor = System.Drawing.Color.White;
             this.pbPlatno.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbPlatno.Location = new System.Drawing.Point(39, 124);
+            this.pbPlatno.Location = new System.Drawing.Point(39, 138);
             this.pbPlatno.Name = "pbPlatno";
-            this.pbPlatno.Size = new System.Drawing.Size(561, 350);
+            this.pbPlatno.Size = new System.Drawing.Size(561, 336);
             this.pbPlatno.TabIndex = 0;
             this.pbPlatno.TabStop = false;
+            this.pbPlatno.Click += new System.EventHandler(this.pbPlatno_Click);
             this.pbPlatno.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseDown);
             this.pbPlatno.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseMove);
             this.pbPlatno.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseUp);
@@ -113,10 +125,10 @@
             this.gpVyberBarvy.Controls.Add(this.pnColorWhite);
             this.gpVyberBarvy.Controls.Add(this.pnBackColor);
             this.gpVyberBarvy.Controls.Add(this.pnForeColor);
-            this.gpVyberBarvy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpVyberBarvy.Location = new System.Drawing.Point(39, 12);
+            this.gpVyberBarvy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gpVyberBarvy.Location = new System.Drawing.Point(39, 27);
             this.gpVyberBarvy.Name = "gpVyberBarvy";
-            this.gpVyberBarvy.Size = new System.Drawing.Size(561, 106);
+            this.gpVyberBarvy.Size = new System.Drawing.Size(257, 106);
             this.gpVyberBarvy.TabIndex = 3;
             this.gpVyberBarvy.TabStop = false;
             this.gpVyberBarvy.Text = "Výběr Barvy";
@@ -289,15 +301,108 @@
             this.pnForeColor.Size = new System.Drawing.Size(35, 26);
             this.pnForeColor.TabIndex = 0;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbElipse);
+            this.groupBox1.Controls.Add(this.rbRectangle);
+            this.groupBox1.Controls.Add(this.rbLine);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBox1.Location = new System.Drawing.Point(302, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(163, 106);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Nástroje";
+            // 
+            // rbElipse
+            // 
+            this.rbElipse.AutoSize = true;
+            this.rbElipse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rbElipse.Location = new System.Drawing.Point(7, 69);
+            this.rbElipse.Name = "rbElipse";
+            this.rbElipse.Size = new System.Drawing.Size(73, 19);
+            this.rbElipse.TabIndex = 2;
+            this.rbElipse.Text = "Kružnice";
+            this.rbElipse.UseVisualStyleBackColor = true;
+            // 
+            // rbRectangle
+            // 
+            this.rbRectangle.AutoSize = true;
+            this.rbRectangle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rbRectangle.Location = new System.Drawing.Point(7, 46);
+            this.rbRectangle.Name = "rbRectangle";
+            this.rbRectangle.Size = new System.Drawing.Size(74, 19);
+            this.rbRectangle.TabIndex = 1;
+            this.rbRectangle.Text = "Obdelník";
+            this.rbRectangle.UseVisualStyleBackColor = true;
+            this.rbRectangle.CheckedChanged += new System.EventHandler(this.rbTool_CheckedChanged);
+            // 
+            // rbLine
+            // 
+            this.rbLine.AutoSize = true;
+            this.rbLine.Checked = true;
+            this.rbLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rbLine.Location = new System.Drawing.Point(7, 23);
+            this.rbLine.Name = "rbLine";
+            this.rbLine.Size = new System.Drawing.Size(51, 19);
+            this.rbLine.TabIndex = 0;
+            this.rbLine.TabStop = true;
+            this.rbLine.Text = "Čára";
+            this.rbLine.UseVisualStyleBackColor = true;
+            this.rbLine.CheckedChanged += new System.EventHandler(this.rbTool_CheckedChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.souborToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(832, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // souborToolStripMenuItem
+            // 
+            this.souborToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiUlozit,
+            this.tsmiOtevrit,
+            this.tsmiKonec});
+            this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
+            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.souborToolStripMenuItem.Text = "Soubor";
+            // 
+            // tsmiUlozit
+            // 
+            this.tsmiUlozit.Name = "tsmiUlozit";
+            this.tsmiUlozit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiUlozit.Text = "Uložit";
+            this.tsmiUlozit.Click += new System.EventHandler(this.tsmiUlozit_Click);
+            // 
+            // tsmiOtevrit
+            // 
+            this.tsmiOtevrit.Name = "tsmiOtevrit";
+            this.tsmiOtevrit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiOtevrit.Text = "Otevřít";
+            // 
+            // tsmiKonec
+            // 
+            this.tsmiKonec.Name = "tsmiKonec";
+            this.tsmiKonec.Size = new System.Drawing.Size(180, 22);
+            this.tsmiKonec.Text = "Konec";
+            this.tsmiKonec.Click += new System.EventHandler(this.tsmiKonec_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 507);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gpVyberBarvy);
             this.Controls.Add(this.sStripBottom);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pbPlatno);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Kreslení";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -305,6 +410,10 @@
             this.sStripBottom.ResumeLayout(false);
             this.sStripBottom.PerformLayout();
             this.gpVyberBarvy.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,6 +443,15 @@
         private System.Windows.Forms.Panel pnColorPurple;
         private System.Windows.Forms.Panel pnColorPink;
         private System.Windows.Forms.Panel pnColorCyan;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbLine;
+        private System.Windows.Forms.RadioButton rbElipse;
+        private System.Windows.Forms.RadioButton rbRectangle;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem souborToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUlozit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOtevrit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiKonec;
     }
 }
 

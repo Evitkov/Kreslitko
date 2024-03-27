@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,7 @@ namespace Kreslitko
                     //kreslím
                     mblImDrawing = true;
                 }
+
                
             }
             catch (Exception ex)
@@ -120,14 +122,32 @@ namespace Kreslitko
             try
             {
                 Pen lobjPero;
+                Brush lobjBrush;
+                lobjPero = new Pen(mobjForeColor);
+                lobjBrush = new SolidBrush(mobjBackColor);
                 //vybrat co kreslím
-                switch(menActualTool)
+                switch (menActualTool)
                 {
                     case enTools.Line:
+                        //nakresli čáru
+                        mobjGrafika.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
+                        break;
+                    case enTools.Box:
                         //nastavit pero
                         lobjPero = new Pen(mobjForeColor);
                         //nakresli čáru
-                        mobjGrafika.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
+                        if (mobjBackColor != Color.White) 
+                        {
+                            mobjGrafika.FillRectangle(lobjBrush,
+                            mobjDrawingCoordsStart.X, mobjDrawingCoordsStart.Y,
+                            Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
+                            Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
+                        }
+                        else if (mobjBackColor == Color.White) {mobjGrafika.DrawRectangle(lobjPero, 
+                            mobjDrawingCoordsStart.X, mobjDrawingCoordsStart.Y, 
+                            Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
+                            Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
+                            }
                         break;
                 }
             }
@@ -154,6 +174,13 @@ namespace Kreslitko
                     //zapsat
                     mobjForeColor = lobjPanel.BackColor;
                 }
+                if (e.Button == MouseButtons.Right)
+                {
+                    //zobrazit
+                    pnBackColor.BackColor = lobjPanel.BackColor;
+                    //zapsat
+                    mobjBackColor = lobjPanel.BackColor;
+                }
 
             }
             catch (Exception ex)
@@ -162,5 +189,58 @@ namespace Kreslitko
             }
         }
 
+        private void pbPlatno_Click(object sender, EventArgs e)
+        {
+
+        }
+        //
+        // výběr nástroje
+        //
+        private void rbTool_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                RadioButton lobjTool;
+                lobjTool = (RadioButton)sender; 
+
+                //výběr nástroje
+
+                    switch (lobjTool.Text) 
+                    {
+                        case "Čára":
+                            menActualTool = enTools.Line;
+                            break;
+                    case "Obdelník":
+                        menActualTool = enTools.Box;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                menActualTool = enTools.Line;
+                rbLine.Checked = true;
+            }
+        }
+        //
+        // ukončit program
+        //
+        private void tsmiKonec_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        //
+        //uložit obrázek
+        //
+        private void tsmiUlozit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                pbPlatno.Image.Save("c:\\temp\\obrazek.jpg", ImageFormat.Jpeg);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }
