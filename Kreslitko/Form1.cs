@@ -17,7 +17,7 @@ namespace Kreslitko
         Graphics mobjGrafika;
 
         //nástroj pro kreslení
-        enum enTools { Line, Box, Circle};
+        enum enTools { Line, Rectangle, Elipse, Pen};
         enTools menActualTool;
         bool mblImDrawing=false;
         //barvy kreslení
@@ -27,6 +27,7 @@ namespace Kreslitko
         //souradnice kresleneho objektu
         Point mobjDrawingCoordsStart;
         Point mobjDrawingCoordsEnd;
+        Point mobjDrawingCoords1;
         public Form1()
         {
             InitializeComponent();
@@ -47,17 +48,17 @@ namespace Kreslitko
         //
         // testovací tlačítko
         //
-        private void button1_Click(object sender, EventArgs e)
+        private void btVymazat_Click(object sender, EventArgs e)
         {
-            mobjGrafika.DrawLine(Pens.Black, 10, 10, 100, 100);
-            // 80,80 - počátek ; 20 šířka obrysového obdelníku; 30 výška obrys obdelníku
-            mobjGrafika.FillEllipse(Brushes.Cyan, 80, 80, 20, 30);
+            pbPlatno.Image = null;
         }
         //
         // pohyb myši nad pictureboxem
         //
         private void pbPlatno_MouseMove(object sender, MouseEventArgs e)
         {
+            Pen lobjPero;
+            lobjPero = new Pen(mobjForeColor);
             try
             {
                 //souřadnice myši do statusu
@@ -67,11 +68,20 @@ namespace Kreslitko
             { 
             
             }
-
+            if (menActualTool == enTools.Pen)
+            {
+                if (mblImDrawing == true)
+                {
+                    mobjGrafika.DrawRectangle(lobjPero, e.X, e.Y, 1, 1);
+                }
+                    
+            }
         }
 
         private void pbPlatno_MouseDown(object sender, MouseEventArgs e)
         {
+            Pen lobjPero;
+            lobjPero = new Pen(mobjForeColor);
             try
             {
                 //test na levé tlačítko
@@ -83,9 +93,10 @@ namespace Kreslitko
 
                     //kreslím
                     mblImDrawing = true;
+                    
                 }
 
-               
+
             }
             catch (Exception ex)
             {
@@ -108,7 +119,8 @@ namespace Kreslitko
                     NakresliObjekt();
 
                     //kreslím
-                    mblImDrawing = true;
+                    mblImDrawing = false;
+                    
                 }
 
             }
@@ -132,22 +144,73 @@ namespace Kreslitko
                         //nakresli čáru
                         mobjGrafika.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
                         break;
-                    case enTools.Box:
+                    case enTools.Rectangle:
                         //nastavit pero
                         lobjPero = new Pen(mobjForeColor);
+                        if (mobjDrawingCoordsStart.X - mobjDrawingCoordsEnd.X > 0)
+                        {
+                            mobjDrawingCoords1.X = mobjDrawingCoordsEnd.X;
+                        }
+                        if (mobjDrawingCoordsStart.X - mobjDrawingCoordsEnd.X < 0)
+                        {
+                            mobjDrawingCoords1.X = mobjDrawingCoordsStart.X;
+                        }
+                        if (mobjDrawingCoordsStart.Y - mobjDrawingCoordsEnd.Y > 0)
+                        {
+                            mobjDrawingCoords1.Y = mobjDrawingCoordsEnd.Y;
+                        }
+                        if (mobjDrawingCoordsStart.Y - mobjDrawingCoordsEnd.Y < 0)
+                        {
+                            mobjDrawingCoords1.Y = mobjDrawingCoordsStart.Y;
+                        }
                         //nakresli čáru
                         if (mobjBackColor != Color.White) 
                         {
                             mobjGrafika.FillRectangle(lobjBrush,
-                            mobjDrawingCoordsStart.X, mobjDrawingCoordsStart.Y,
+                            mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
                         }
-                        else if (mobjBackColor == Color.White) {mobjGrafika.DrawRectangle(lobjPero, 
-                            mobjDrawingCoordsStart.X, mobjDrawingCoordsStart.Y, 
+                        else if (mobjBackColor == Color.White) {mobjGrafika.DrawRectangle(lobjPero,
+                            mobjDrawingCoords1.X, mobjDrawingCoords1.Y, 
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
                             }
+                        break;
+                    case enTools.Elipse:
+                        //nastavit pero
+                        lobjPero = new Pen(mobjForeColor);
+                        if (mobjDrawingCoordsStart.X - mobjDrawingCoordsEnd.X > 0)
+                        {
+                            mobjDrawingCoords1.X = mobjDrawingCoordsEnd.X;
+                        }
+                        if (mobjDrawingCoordsStart.X - mobjDrawingCoordsEnd.X < 0)
+                        {
+                            mobjDrawingCoords1.X = mobjDrawingCoordsStart.X;
+                        }
+                        if (mobjDrawingCoordsStart.Y - mobjDrawingCoordsEnd.Y > 0)
+                        {
+                            mobjDrawingCoords1.Y = mobjDrawingCoordsEnd.Y;
+                        }
+                        if (mobjDrawingCoordsStart.Y - mobjDrawingCoordsEnd.Y < 0)
+                        {
+                            mobjDrawingCoords1.Y = mobjDrawingCoordsStart.Y;
+                        }
+                        //nakresli čáru
+                        if (mobjBackColor != Color.White)
+                        {
+                            mobjGrafika.FillEllipse(lobjBrush,
+                            mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
+                            Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
+                            Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
+                        }
+                        else if (mobjBackColor == Color.White)
+                        {
+                            mobjGrafika.DrawEllipse(lobjPero,
+                            mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
+                            Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
+                            Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
+                        }
                         break;
                 }
             }
@@ -207,11 +270,17 @@ namespace Kreslitko
 
                     switch (lobjTool.Text) 
                     {
-                        case "Čára":
+                    case "Pero":
+                        menActualTool = enTools.Pen;
+                        break;
+                    case "Čára":
                             menActualTool = enTools.Line;
                             break;
                     case "Obdelník":
-                        menActualTool = enTools.Box;
+                        menActualTool = enTools.Rectangle;
+                        break;
+                    case "Kružnice":
+                        menActualTool = enTools.Elipse;
                         break;
                 }
             }
