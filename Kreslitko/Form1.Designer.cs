@@ -51,6 +51,7 @@
             this.pnBackColor = new System.Windows.Forms.Panel();
             this.pnForeColor = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbPen = new System.Windows.Forms.RadioButton();
             this.rbElipse = new System.Windows.Forms.RadioButton();
             this.rbRectangle = new System.Windows.Forms.RadioButton();
             this.rbLine = new System.Windows.Forms.RadioButton();
@@ -59,7 +60,8 @@
             this.tsmiUlozit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOtevrit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiKonec = new System.Windows.Forms.ToolStripMenuItem();
-            this.rbPen = new System.Windows.Forms.RadioButton();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlatno)).BeginInit();
             this.sStripBottom.SuspendLayout();
             this.gpVyberBarvy.SuspendLayout();
@@ -76,7 +78,6 @@
             this.pbPlatno.Size = new System.Drawing.Size(744, 365);
             this.pbPlatno.TabIndex = 0;
             this.pbPlatno.TabStop = false;
-            this.pbPlatno.Click += new System.EventHandler(this.pbPlatno_Click);
             this.pbPlatno.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseDown);
             this.pbPlatno.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseMove);
             this.pbPlatno.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPlatno_MouseUp);
@@ -318,6 +319,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nástroje";
             // 
+            // rbPen
+            // 
+            this.rbPen.AutoSize = true;
+            this.rbPen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rbPen.Location = new System.Drawing.Point(105, 36);
+            this.rbPen.Name = "rbPen";
+            this.rbPen.Size = new System.Drawing.Size(51, 19);
+            this.rbPen.TabIndex = 3;
+            this.rbPen.Text = "Pero";
+            this.rbPen.UseVisualStyleBackColor = true;
+            this.rbPen.CheckedChanged += new System.EventHandler(this.rbTool_CheckedChanged);
+            // 
             // rbElipse
             // 
             this.rbElipse.AutoSize = true;
@@ -396,17 +409,9 @@
             this.tsmiKonec.Text = "Konec";
             this.tsmiKonec.Click += new System.EventHandler(this.tsmiKonec_Click);
             // 
-            // rbPen
+            // openFileDialog1
             // 
-            this.rbPen.AutoSize = true;
-            this.rbPen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.rbPen.Location = new System.Drawing.Point(105, 36);
-            this.rbPen.Name = "rbPen";
-            this.rbPen.Size = new System.Drawing.Size(51, 19);
-            this.rbPen.TabIndex = 3;
-            this.rbPen.Text = "Pero";
-            this.rbPen.UseVisualStyleBackColor = true;
-            this.rbPen.CheckedChanged += new System.EventHandler(this.rbTool_CheckedChanged);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -470,6 +475,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiOtevrit;
         private System.Windows.Forms.ToolStripMenuItem tsmiKonec;
         private System.Windows.Forms.RadioButton rbPen;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

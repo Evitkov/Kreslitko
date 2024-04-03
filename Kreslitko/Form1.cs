@@ -15,7 +15,9 @@ namespace Kreslitko
     {
         // kreslící objekt Grafiky
         Graphics mobjGrafika;
-
+        // kreslící objekt v paměti
+        Bitmap mobjBitmap;
+        Graphics mobjGrafikaVRam;
         //nástroj pro kreslení
         enum enTools { Line, Rectangle, Elipse, Pen};
         enTools menActualTool;
@@ -44,6 +46,10 @@ namespace Kreslitko
         {
             //vytvoření grafiky 
             mobjGrafika = pbPlatno.CreateGraphics();
+            //vytvoření grafiky na oozadí
+            mobjBitmap= new Bitmap (pbPlatno.Width, pbPlatno.Height);
+            mobjGrafikaVRam = Graphics.FromImage(mobjBitmap);
+            mobjGrafikaVRam.Clear(Color.White);
         }
         //
         // testovací tlačítko
@@ -51,6 +57,7 @@ namespace Kreslitko
         private void btVymazat_Click(object sender, EventArgs e)
         {
             pbPlatno.Image = null;
+            mobjBitmap = null;
         }
         //
         // pohyb myši nad pictureboxem
@@ -63,6 +70,22 @@ namespace Kreslitko
             {
                 //souřadnice myši do statusu
                 tsMysSouradnice.Text = "x:" + e.X.ToString() + "y:" + e.Y.ToString();
+                if (e.Button == MouseButtons.Left)
+                {
+                    //zaznamenat souřadnice
+                    mobjDrawingCoordsEnd.X = e.X;
+                    mobjDrawingCoordsEnd.Y = e.Y;
+
+                    //nakopírovat na picturebox
+                    mobjGrafika.DrawImage(mobjBitmap, 0, 0);
+                    //Nakresli
+                    NakresliObjekt(mobjGrafika);
+
+       
+
+   
+
+                }
             }
             catch (Exception ex)
             { 
@@ -116,7 +139,10 @@ namespace Kreslitko
                     mobjDrawingCoordsEnd.Y = e.Y;
 
                     //Nakresli
-                    NakresliObjekt();
+                    NakresliObjekt(mobjGrafikaVRam);
+
+                    //nakopírovat na picturebox
+                    mobjGrafika.DrawImage(mobjBitmap,0,0);  
 
                     //kreslím
                     mblImDrawing = false;
@@ -129,7 +155,7 @@ namespace Kreslitko
                 mblImDrawing = false;
             }
         }
-        private void NakresliObjekt()
+        private void NakresliObjekt(Graphics objGrafika)
         {
             try
             {
@@ -142,7 +168,7 @@ namespace Kreslitko
                 {
                     case enTools.Line:
                         //nakresli čáru
-                        mobjGrafika.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
+                        objGrafika.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
                         break;
                     case enTools.Rectangle:
                         //nastavit pero
@@ -166,12 +192,14 @@ namespace Kreslitko
                         //nakresli čáru
                         if (mobjBackColor != Color.White) 
                         {
-                            mobjGrafika.FillRectangle(lobjBrush,
+                            objGrafika.FillRectangle(lobjBrush,
                             mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
                         }
-                        else if (mobjBackColor == Color.White) {mobjGrafika.DrawRectangle(lobjPero,
+                        else if (mobjBackColor == Color.White) 
+                        {
+                            objGrafika.DrawRectangle(lobjPero,
                             mobjDrawingCoords1.X, mobjDrawingCoords1.Y, 
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
@@ -199,14 +227,14 @@ namespace Kreslitko
                         //nakresli čáru
                         if (mobjBackColor != Color.White)
                         {
-                            mobjGrafika.FillEllipse(lobjBrush,
+                            objGrafika.FillEllipse(lobjBrush,
                             mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
                         }
                         else if (mobjBackColor == Color.White)
                         {
-                            mobjGrafika.DrawEllipse(lobjPero,
+                            objGrafika.DrawEllipse(lobjPero,
                             mobjDrawingCoords1.X, mobjDrawingCoords1.Y,
                             Math.Abs(mobjDrawingCoordsEnd.X - mobjDrawingCoordsStart.X),
                             Math.Abs(mobjDrawingCoordsEnd.Y - mobjDrawingCoordsStart.Y));
@@ -252,10 +280,6 @@ namespace Kreslitko
             }
         }
 
-        private void pbPlatno_Click(object sender, EventArgs e)
-        {
-
-        }
         //
         // výběr nástroje
         //
@@ -304,12 +328,14 @@ namespace Kreslitko
         {
             try
             {
-                pbPlatno.Image.Save("c:\\temp\\obrazek.jpg", ImageFormat.Jpeg);
+                saveFileDialog1.ShowDialog();
+               //mobjBitmap.Save("c:\\temp\\obrazek.jpg", ImageFormat.Jpeg);
             }
             catch (Exception ex)
             {
 
             }
         }
+
     }
 }
