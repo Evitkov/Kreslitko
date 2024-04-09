@@ -92,7 +92,7 @@ namespace Kreslitko
                     //kreslení pomocí pera
                     if (menActualTool == enTools.Pen)
                     {
-                        if (mblImDrawing = true)  
+                        if (mblImDrawing == true)  
                             {
                                 //kreslení přímky mezi 2 po sobě jdoucími body
                                 mobjGrafikaVRam.DrawLine(lobjPero, mobjDrawingCoordsStart, mobjDrawingCoordsEnd);
@@ -357,7 +357,7 @@ namespace Kreslitko
                 saveFileDialog.Filter = "PNG|*.png;|JPEG|*.jpeg;|BMP|*.bmp;|GIF|*.gif;";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Get the selected file path
+                    // pr
                     string selectedFilePath = saveFileDialog.FileName;
 
                     // jaký formát byl vybrán
@@ -402,7 +402,20 @@ namespace Kreslitko
 
         private void tsmiOtevrit_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    mobjBitmap = new Bitmap(openFileDialog.FileName);
+                    mobjGrafikaVRam = Graphics.FromImage(mobjBitmap);
+                    pbPlatno.Image = mobjBitmap;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Chyba");
+            }
         }
     }
 }
+
