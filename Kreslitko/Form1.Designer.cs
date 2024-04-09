@@ -55,18 +55,18 @@
             this.rbElipse = new System.Windows.Forms.RadioButton();
             this.rbRectangle = new System.Windows.Forms.RadioButton();
             this.rbLine = new System.Windows.Forms.RadioButton();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.souborToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUlozit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOtevrit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiKonec = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlatno)).BeginInit();
             this.sStripBottom.SuspendLayout();
             this.gpVyberBarvy.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbPlatno
@@ -84,8 +84,8 @@
             // 
             // btVymazat
             // 
-            this.btVymazat.BackColor = System.Drawing.Color.IndianRed;
-            this.btVymazat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btVymazat.BackColor = System.Drawing.Color.Transparent;
+            this.btVymazat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVymazat.Location = new System.Drawing.Point(519, 27);
             this.btVymazat.Name = "btVymazat";
             this.btVymazat.Size = new System.Drawing.Size(116, 29);
@@ -369,15 +369,15 @@
             this.rbLine.UseVisualStyleBackColor = true;
             this.rbLine.CheckedChanged += new System.EventHandler(this.rbTool_CheckedChanged);
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.souborToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(832, 24);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(832, 24);
+            this.menuStrip.TabIndex = 5;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // souborToolStripMenuItem
             // 
@@ -392,26 +392,27 @@
             // tsmiUlozit
             // 
             this.tsmiUlozit.Name = "tsmiUlozit";
-            this.tsmiUlozit.Size = new System.Drawing.Size(110, 22);
+            this.tsmiUlozit.Size = new System.Drawing.Size(180, 22);
             this.tsmiUlozit.Text = "Uložit";
             this.tsmiUlozit.Click += new System.EventHandler(this.tsmiUlozit_Click);
             // 
             // tsmiOtevrit
             // 
             this.tsmiOtevrit.Name = "tsmiOtevrit";
-            this.tsmiOtevrit.Size = new System.Drawing.Size(110, 22);
+            this.tsmiOtevrit.Size = new System.Drawing.Size(180, 22);
             this.tsmiOtevrit.Text = "Otevřít";
+            this.tsmiOtevrit.Click += new System.EventHandler(this.tsmiOtevrit_Click);
             // 
             // tsmiKonec
             // 
             this.tsmiKonec.Name = "tsmiKonec";
-            this.tsmiKonec.Size = new System.Drawing.Size(110, 22);
+            this.tsmiKonec.Size = new System.Drawing.Size(180, 22);
             this.tsmiKonec.Text = "Konec";
             this.tsmiKonec.Click += new System.EventHandler(this.tsmiKonec_Click);
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -421,10 +422,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gpVyberBarvy);
             this.Controls.Add(this.sStripBottom);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.btVymazat);
             this.Controls.Add(this.pbPlatno);
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Kreslení";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -434,8 +435,8 @@
             this.gpVyberBarvy.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -469,14 +470,14 @@
         private System.Windows.Forms.RadioButton rbLine;
         private System.Windows.Forms.RadioButton rbElipse;
         private System.Windows.Forms.RadioButton rbRectangle;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem souborToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiUlozit;
         private System.Windows.Forms.ToolStripMenuItem tsmiOtevrit;
         private System.Windows.Forms.ToolStripMenuItem tsmiKonec;
         private System.Windows.Forms.RadioButton rbPen;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
