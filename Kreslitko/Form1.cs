@@ -357,7 +357,7 @@ namespace Kreslitko
                 saveFileDialog.Filter = "PNG|*.png;|JPEG|*.jpeg;|BMP|*.bmp;|GIF|*.gif;";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // pr
+                    // zjišťuje jaká cesta byla vybrána
                     string selectedFilePath = saveFileDialog.FileName;
 
                     // jaký formát byl vybrán
@@ -386,26 +386,29 @@ namespace Kreslitko
                     if (mobjBitmap != null)
                     {
                         mobjBitmap.Save(selectedFilePath, format);
-                        MessageBox.Show("Image saved successfully!");
+                        MessageBox.Show("Obrázek se podařilo uložit");
                     }
                     else
                     {
-                        MessageBox.Show("No image to save.");
+                        MessageBox.Show("Žádný obrázek k uložení");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Chyba");
             }
         }
-
+        //-----------------------------------
+        //menu strip otevřít obrázek
+        //----------------------------------
         private void tsmiOtevrit_Click(object sender, EventArgs e)
         {
             try
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    //zkopírování otevřeného obrázku na bitmapu a picturebox
                     mobjBitmap = new Bitmap(openFileDialog.FileName);
                     mobjGrafikaVRam = Graphics.FromImage(mobjBitmap);
                     pbPlatno.Image = mobjBitmap;
